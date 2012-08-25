@@ -21,7 +21,11 @@ module Periscope
   end
 
   def periscope_call(chain, scope, param)
-    return chain unless options = periscope_options[scope]
+    if periscope_options.present?
+      return chain unless options = periscope_options[scope]
+    else
+      options = {}
+    end
 
     method = periscope_method(scope, options)
     values = periscope_values(param, options)
